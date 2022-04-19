@@ -25,3 +25,8 @@ class OtherThingWrapperROS:
 
     def do_other_thing(self, other_thing):
         self.other_thing.do_other_thing(other_thing)
+
+
+class UntestedThing:
+    def __init__(self):
+        pass

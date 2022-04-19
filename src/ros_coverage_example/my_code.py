@@ -9,7 +9,19 @@ class SomethingDoer:
         self.initialised = True
 
     def do_thing(self, arg: str):
-        return arg.startswith("test")
+        if arg.startswith("test"):
+            return True
+        elif arg.startswith("not"):
+            return False
+        else:
+            # untested branch
+            return True
+
+    def untested_something(self, arg: str):
+        if arg.startswith("asdf"):
+            return False
+
+        return True
 
 
 class OtherThingDoer:
@@ -21,5 +33,15 @@ class OtherThingDoer:
             raise ValueError
         elif 0 <= arg <= 10:
             return True
+
+        if arg < 10:
+            # This is an untested branch
+            pass
         else:
             return False
+
+    def untested_other_thing(self, arg: int):
+        if arg > 10:
+            raise ValueError
+
+        return False

@@ -1,0 +1,3 @@
+<launch>
+  <test test-name="my_code" pkg="ros_coverage_example" type="test_my_code.py"/>
+</launch>

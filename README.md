@@ -51,10 +51,35 @@ michal@vetinari ~ $ ls -la ~/.ros/.cover*
 -rw-r--r-- 1 michal michal 110592 Apr 19 15:16 /home/michal/.ros/.coverage
 ```
 
-You can then use that coverage file to generate some html files to view the coverage more conveniently.
+Once we have that coverage file, we can generate a report with
+
+```commandline
+coverage report
+```
+
+However, without any filtering, this will usually show a lot of things that you're not interested in, like ros modules, numpy, and any other packages you've imported. To reduce the output we can use a filter like
+
+```commandline
+coverage report --include="*src/ros_coverage_example*"
+```
+
+which will generate a much more readable report
+
+```
+Name                                                                                        Stmts   Miss  Cover
+---------------------------------------------------------------------------------------------------------------
+/home/michal/git/independent/ros_coverage_example/src/ros_coverage_example/my_code.py          29      8    72%
+/home/michal/git/independent/ros_coverage_example/src/ros_coverage_example/my_code_ros.py      21      3    86%
+---------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                          50     11    78%
+```
+
+You can also use that coverage file to generate some html files to view the coverage more conveniently.
 
 ```commandline
 cd .ros
-coverage html
+coverage html --include="*src/ros_coverage_example*"
 xdg-open htmlcov/index.html
 ```
+
+

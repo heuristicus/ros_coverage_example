@@ -14,7 +14,7 @@ You will see the results of the trivial tests that are implemented.
 
 # Generating coverage
 
-## Manual coverage
+## Manual python coverage
 
 It's possible to generate coverage somewhat manually. Using the `coverage` package, we can add a launch prefix to the test launch files.
 
@@ -26,6 +26,12 @@ It's possible to generate coverage somewhat manually. Using the `coverage` packa
 ```
 
 With this launch prefix, when the tests are run you will see some `.coverage` prefixed files generated in the `~/.ros` directory.
+
+To generate the coverage, run the tests with
+
+```commandline
+catkin test ros_coverage_example
+```
 
 If there is only one test, it may generate a single coverage file. If there are more, it's likely that they have suffixes to distinguish them, e.g.
 
@@ -83,3 +89,32 @@ xdg-open htmlcov/index.html
 ```
 
 
+## Using the code_coverage package
+
+The [code_coverage](https://github.com/mikeferguson/code_coverage) package is a useful tool which adds some cmake commands to generate coverage.
+
+You can install it with
+
+```commandline
+sudo apt install ros-noetic-code-coverage
+```
+
+There are instructions in that repository on how to install it, but you can also see the changes made in cmakelists and package xml in the commit [`ce1922`](https://github.com/heuristicus/ros_coverage_example/commit/ce1922eae5c94d58ac16437ea88dd93e3024057c) in this repository.
+
+Key points:
+- If using test launch files for python, you must add `launch-prefix="python3-coverage run -p"` to the `<test>` tag.
+- Make sure you are using `add_rostest` along with test launch files to make sure that coverage is actually generated. Using only `catkin_add_gtest` is not sufficient for code_coverage to generate the coverage reports.
+
+### Issues with symlinks
+
+If using symlinked repositories, make sure you have the commit from the PR at https://github.com/mikeferguson/code_coverage/pull/37. Without that, python coverage generation will not be fully automated.
+
+### Issues with `python3-coverage`
+
+When trying code_coverage initially, I was using `coverage` installed with `pip3 install coverage`. There seems to be some version mismatch or other issues even if `python3-coverage` is actually installed. I ended up making a symlink with
+
+```commandline
+sudo ln -s /home/michal/.local/bin/coverage /usr/bin/python3-coverage
+```
+
+which made everything work.

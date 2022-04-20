@@ -33,10 +33,9 @@ class OtherThingDoer:
             raise ValueError
         elif 0 <= arg <= 10:
             return True
-
-        if arg < 10:
+        elif 30 <= arg <= 50:
             # This is an untested branch
-            pass
+            return True
         else:
             return False
 

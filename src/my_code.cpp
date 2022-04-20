@@ -26,13 +26,11 @@ bool OtherThingDoer::doOtherThing(int arg) const {
     throw std::invalid_argument("Argument is less than zero");
   } else if (arg >= 0 && arg <= 10) {
     return true;
+  } else if (arg >= 30 && arg <= 50) {
+    return true;
+  } else {
+    return false;
   }
-
-  if (arg < 10) {
-    // untested branch
-  }
-
-  return false;
 }
 
 bool OtherThingDoer::untestedOtherThing(int arg) const {

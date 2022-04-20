@@ -55,6 +55,6 @@ class TestMyCodeSuite(unittest.TestSuite):
 
 
 if __name__ == "__main__":
-    import rostest
+    import rosunit
 
-    rostest.unitrun(PKG, "my_code_ros", "test_my_code.TestMyCodeSuite")
+    rosunit.unitrun(PKG, "my_code_ros", "test_my_code.TestMyCodeSuite")
